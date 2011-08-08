@@ -1,1 +1,0 @@
-"%JAVA_HOME%\bin\java" -cp "lib/*" Server %1
