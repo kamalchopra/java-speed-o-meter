@@ -9,8 +9,8 @@
 
 import org.jfree.data.time.TimeSeries;
 
+import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
@@ -43,7 +43,7 @@ public class Transmitter
                     counter.start();
 
                     try {
-                        final OutputStream os = s.getOutputStream();
+                        final DataOutputStream dos = new DataOutputStream( new BufferedOutputStream( s.getOutputStream() ) );
 
                         while( !Thread.interrupted() ) {
                             if( !running.get() ) {
@@ -51,20 +51,20 @@ public class Transmitter
                                 continue;
                             }
 
-                            // Every packet is between 1000 and 2000 bytes in size
-                            final int packetSize = r.nextInt( 1000 ) + 1000;
+                            final int packetSize = r.nextInt( 8192 ) + 2048;
                             final byte[] packet = new byte[ packetSize ];
                             r.nextBytes( packet );
                             final CRC32 crc = new CRC32();
                             crc.update( packet );
 
-                            final DataOutputStream dos = new DataOutputStream( os );
                             dos.writeInt( packetSize );
                             counter.addBytes( INTEGER_BYTES );
                             dos.write( packet );
                             counter.addBytes( packetSize );
                             dos.writeLong( crc.getValue() );
                             counter.addBytes( CRC_BYTES );
+
+                            dos.flush();
                         }
                     } catch( InterruptedException e ) {
                         System.out.println( "Transmitter thread interrupted!" );
