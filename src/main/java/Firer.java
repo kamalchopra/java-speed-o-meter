@@ -1,3 +1,4 @@
+import java.awt.GraphicsEnvironment;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -6,7 +7,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class Firer
 {
-    private static final Plotter p = new Plotter();
+    private static final Plotter p = buildPlotter();
 
     public static void fireUpThreads( final Socket s ) throws InterruptedException
     {
@@ -75,5 +76,14 @@ public class Firer
                 }
             }
         };
+    }
+
+    private static Plotter buildPlotter()
+    {
+        if( GraphicsEnvironment.isHeadless() ) {
+            return Plotter.EMPTY_PLOTTER;
+        }
+
+        return new PlotterImpl();
     }
 }
