@@ -6,14 +6,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.zip.CRC32;
 
-//
-// Copyright 2011 Emerald Associates, Inc.  All Rights Reserved.
-//
-// Use of this file other than by Emerald Associates, Inc. is forbidden
-// unless otherwise authorized by a separate written license agreement.
-//
-// $Id$
-//
 public class Receiver
 {
     private static final int CRC_BYTES = Long.SIZE / Byte.SIZE;
