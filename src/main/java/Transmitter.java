@@ -1,12 +1,3 @@
-//
-// Copyright 2011 Emerald Associates, Inc.  All Rights Reserved.
-//
-// Use of this file other than by Emerald Associates, Inc. is forbidden
-// unless otherwise authorized by a separate written license agreement.
-//
-// $Id$
-//
-
 import org.jfree.data.time.TimeSeries;
 
 import java.io.BufferedOutputStream;
