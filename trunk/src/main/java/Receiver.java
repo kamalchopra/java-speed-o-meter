@@ -27,7 +27,7 @@ public class Receiver
                 @Override
                 public void run()
                 {
-                    final Counter counter = new Counter( "TRANSMIT", plotter );
+                    final Counter counter = new Counter( "RECEIVE", plotter );
                     counter.start();
 
                     try {
